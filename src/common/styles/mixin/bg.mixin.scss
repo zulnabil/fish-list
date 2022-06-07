@@ -25,3 +25,13 @@
   );
   background-repeat: repeat-x;
 }
+
+@mixin gradient-multi($direction, $color-stops...) {
+  @if is-direction($direction) == false {
+    $color-stops: ($direction, $color-stops);
+    $direction: 180deg;
+  }
+
+  background: nth(nth($color-stops, 1), 1);
+  background: linear-gradient($direction, $color-stops);
+}

@@ -2,15 +2,15 @@
  * Box Shadow Mixin
  */
 
-@mixin box-shadow($template) {
+@mixin shadow($template) {
   box-shadow: get-shadow($template);
 }
 
-@mixin box-shadow-multi($args...) {
+@mixin shadow-multi($args...) {
   box-shadow: $args;
 }
 
-@mixin no-box-shadow() {
+@mixin no-shadow() {
   box-shadow: initial;
 }
 
