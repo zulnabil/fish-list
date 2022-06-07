@@ -16,3 +16,5 @@ export type DefaultThemeType =
   | "text"
 
 export type DefaultSizeType = "large" | "default" | "small"
+
+export type Nullable<T> = T | null | undefined
