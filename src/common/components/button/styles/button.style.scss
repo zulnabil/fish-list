@@ -1,0 +1,64 @@
+@import "common/styles/import.scss";
+
+.ui-button {
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+
+  @include bg-color(white);
+  @include rounded(6px);
+  @include shadow(elevate-sm);
+
+  &--size-small {
+    @include font-size(xs);
+  }
+
+  &--size-medium {
+    @include font-size(sm);
+  }
+
+  &--size-large {
+    @include font-size(lg);
+  }
+
+  &--theme-primary {
+    color: white;
+
+    @include bg-color(primary300);
+
+    &:hover {
+      @include bg-color(primary400);
+    }
+  }
+
+  &--theme-secondary {
+    color: get-color(blackSoft);
+
+    @include bg-color(white);
+
+    &:hover {
+      @include bg-color(background);
+    }
+
+    &:active {
+      @include bg-color(greyLight);
+    }
+  }
+
+  &--variant-text {
+    color: get-color(blackSoft);
+
+    @include bg-color(transparent);
+    @include shadow(unset);
+
+    &:hover {
+      @include bg-color(greyLight);
+    }
+
+    &:active {
+      @include bg-color(greyLight);
+    }
+  }
+}
