@@ -1,0 +1,17 @@
+@import "common/styles/import.scss";
+
+.header-layout {
+  height: 60px;
+
+  @include bg-color(white);
+  @include shadow(default-1);
+
+  &__content {
+    height: 100%;
+  }
+
+  .ui-dialog {
+    height: 100%;
+    width: 60vw;
+  }
+}

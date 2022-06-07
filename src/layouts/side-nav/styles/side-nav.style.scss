@@ -1,0 +1,56 @@
+@import "common/styles/import.scss";
+
+.side-nav-layout {
+  max-width: 240px;
+  width: 100%;
+
+  > button {
+    @media (max-width: 576px) {
+      margin-top: 16px;
+    }
+  }
+
+  &__subtitle {
+    margin: 12px 0;
+
+    @include font-size(xs);
+  }
+
+  &__menus {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__menu {
+    color: get-color(blackSoft);
+    text-decoration: none;
+    display: flex;
+    gap: 8px;
+    line-height: 24px;
+    padding: 8px 12px;
+    width: 100%;
+    outline: none;
+
+    @include no-border();
+    @include rounded(8px);
+
+    &:hover {
+      @include bg-color(greyLight);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &.active {
+      @include bg-color(greyLight);
+    }
+  }
+
+  .ui-button__text {
+    @include font-size(20px);
+    @include font-weight(bold);
+  }
+}
