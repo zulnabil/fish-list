@@ -1,0 +1,9 @@
+@import "common/styles/import.scss";
+
+.ui-page {
+  padding: 4px;
+
+  h1 {
+    color: get-color(primary100);
+  }
+}
