@@ -1,0 +1,38 @@
+@import "common/styles/import.scss";
+
+.ui-dialog {
+  top: 0;
+  max-height: unset;
+  max-width: unset;
+  padding: 16px;
+
+  @include no-border();
+  @include border(right, 1px, solid, blackSoft);
+
+  ::backdrop {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  &[open] {
+    animation: show 0.25s ease normal;
+  }
+
+  &--hide {
+    animation: hide 0.25s ease normal;
+  }
+
+  @keyframes show {
+    from {
+      transform: translateX(-110%);
+    }
+    to {
+      transform: translateX(0%);
+    }
+  }
+
+  @keyframes hide {
+    to {
+      transform: translateX(-110%);
+    }
+  }
+}
