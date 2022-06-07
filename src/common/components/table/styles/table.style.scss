@@ -1,0 +1,10 @@
+@import "common/styles/import.scss";
+
+.ui-table {
+  @include bg-color(white);
+
+  th,
+  td {
+    padding: 4px 8px;
+  }
+}
