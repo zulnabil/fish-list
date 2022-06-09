@@ -4,6 +4,11 @@ import { FC } from "react"
 
 import "./styles/button.style.scss"
 
+/**
+ * Button Component
+ * @param {ButtonProps} props
+ * @returns {FC}
+ */
 const ButtonComponent: FC<ButtonProps> = ({
   children,
   icon,
