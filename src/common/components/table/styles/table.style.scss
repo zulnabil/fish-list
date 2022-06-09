@@ -1,10 +1,14 @@
 @import "common/styles/import.scss";
 
 .ui-table {
+  width: 100%;
+
   @include bg-color(white);
 
   th,
   td {
+    height: 36px;
     padding: 4px 8px;
+    text-align: center;
   }
 }

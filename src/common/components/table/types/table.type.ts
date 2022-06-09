@@ -1,6 +1,8 @@
 export interface TableProps {
   rows: any[]
   columns: ColumnObjectType[]
+  rowCount?: number
+  isLoading?: boolean
 }
 
 export type ColumnObjectType = {
