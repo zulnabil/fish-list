@@ -1,9 +1,11 @@
+import { dateFormatter } from "./../../../common/helper/string.helper"
 import useSWR from "swr"
 import { BASE_STEIN_URL } from "common/config/env"
 import {
   FishItemObjectType,
   FishListParamsType,
 } from "modules/fish-list/types/fish-list.type"
+import { thousandSeparator } from "common/helper/string.helper"
 
 export default function useFishList(params?: FishListParamsType) {
   const url = `${BASE_STEIN_URL}/list${
@@ -12,13 +14,14 @@ export default function useFishList(params?: FishListParamsType) {
 
   const { data, error } = useSWR(url)
 
-  const cleanData = data?.filter(
-    (item: FishItemObjectType) =>
-      item.uuid && item.komoditas && item.komoditas.length > 5
-  )
+  const formattedData = data?.map((fish: FishItemObjectType) => ({
+    ...fish,
+    ...(fish.price && { price: thousandSeparator(fish.price) }),
+    ...(fish.tgl_parsed && { tgl_parsed: dateFormatter(fish.tgl_parsed) }),
+  }))
 
   return {
-    fishes: cleanData,
+    fishes: formattedData,
     isLoading: !error && !data,
     isError: error,
   }
