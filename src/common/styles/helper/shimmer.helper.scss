@@ -1,13 +1,13 @@
 .shine {
-  animation-duration: 2s;
+  animation-duration: 5s;
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;
   animation-name: placeholderShimmer;
   animation-timing-function: linear;
   background-repeat: no-repeat;
   background-size: 800px 104px;
-  display: inline-block;
   position: relative;
+  width: 100%;
 
   @include gradient-multi(
     to right,
@@ -17,6 +17,13 @@
     #f6f7f8 100%
   );
   @include bg-color(rgba(#f6f7f8, 0.1));
+  @include rounded(4px);
+
+  &__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
 }
 
 @keyframes placeholderShimmer {
