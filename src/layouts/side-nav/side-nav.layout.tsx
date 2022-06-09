@@ -16,7 +16,7 @@ export const MapMenu = ({ menus, onClickMenu }: SideNavProps) => {
         {menus.map(({ icon, label, to }) => {
           return (
             <NavLink
-              key={to}
+              key={`nav-${to}`}
               to={to}
               className={({ isActive }) =>
                 isActive
