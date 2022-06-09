@@ -21,6 +21,11 @@ const ICONS: IconType = {
     viewBox: "0 0 384 384",
     translate: "translate(0, 30)",
   },
+  "three-dots": {
+    path: "M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z",
+    viewBox: "0 0 16 16",
+    translate: "translate(0, 0)",
+  },
 }
 
 export default ICONS
