@@ -3,7 +3,7 @@ import { SideNavMenuItem } from "layouts/side-nav/types/side-nav.type"
 export const MENUS: SideNavMenuItem[] = [
   {
     icon: "home",
-    label: "Home",
+    label: "Dashboard",
     to: "/",
   },
   {

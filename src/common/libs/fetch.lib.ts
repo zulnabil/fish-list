@@ -5,8 +5,8 @@ const options = {
   baseURL: BASE_STEIN_URL,
 }
 
-const instance = axios.create(options)
+export const httpCall = axios.create(options)
 
-const fetcher = (url: any) => instance.get(url).then((res) => res.data)
+const fetcher = (url: any) => httpCall.get(url).then((res) => res.data)
 
 export default fetcher

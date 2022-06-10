@@ -2,8 +2,11 @@
 
 .header-layout {
   height: 60px;
+  top: 0;
+  left: 0;
 
   @include bg-color(white);
+  @include border(right, 1px, solid, get-color(greyLight));
   @include shadow(default-1);
 
   &__content {
