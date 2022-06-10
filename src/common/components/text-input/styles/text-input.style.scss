@@ -1,0 +1,25 @@
+@import "common/styles/import";
+
+.ui-text-input {
+  height: 32px;
+  width: 100%;
+
+  @include bg-color(background);
+  @include border(all, 1px, solid, greyLight);
+  @include rounded(4px);
+
+  &[data-addon] {
+    padding-left: 32px;
+  }
+
+  &__wrapper {
+    position: relative;
+  }
+
+  &__left-addon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
