@@ -3,16 +3,22 @@ import useSWR from "swr"
 import { BASE_STEIN_URL } from "common/config/env"
 import {
   FishItemObjectType,
+  ObjectStringType,
   FishListParamsType,
 } from "modules/fish-list/types/fish-list.type"
 import { thousandSeparator } from "common/helper/string.helper"
 
-export default function useFishList(params?: FishListParamsType) {
-  const url = `${BASE_STEIN_URL}/list${
-    params ? `?${new URLSearchParams(params as Record<string, string>)}` : ""
-  }`
+export default function useFishList(
+  params?: FishListParamsType,
+  search?: ObjectStringType
+) {
+  const searchParams = new URLSearchParams(params as Record<string, string>)
 
-  const { data, error } = useSWR(url)
+  if (search) searchParams.append("search", JSON.stringify(search))
+
+  const url = `${BASE_STEIN_URL}/list${params ? `?${searchParams}` : ""}`
+
+  const { data, error } = useSWR(decodeURIComponent(url))
 
   const formattedData = data?.map((fish: FishItemObjectType) => ({
     ...fish,

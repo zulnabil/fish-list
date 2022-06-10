@@ -2,6 +2,7 @@
 
 .ui-card {
   padding: 16px 20px;
+  margin-bottom: 16px;
 
   @include bg-color(white);
   @include rounded(8px);

@@ -5,6 +5,14 @@ export type FishListParamsType = {
   offset?: number
 }
 
+export type FishListCustomParamsType = {
+  search: ObjectStringType
+}
+
+export type ObjectStringType = {
+  [key: string]: string
+}
+
 export type FishItemObjectType = {
   uuid: Nullable<string>
   komoditas: Nullable<string>
