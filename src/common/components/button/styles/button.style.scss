@@ -6,10 +6,15 @@
   align-items: center;
   gap: 8px;
   padding: 4px 10px;
+  flex-shrink: 0;
 
   @include bg-color(white);
-  @include rounded(6px);
+  @include rounded(4px);
   @include shadow(elevate-sm);
+
+  > span {
+    margin: auto;
+  }
 
   &--size-small {
     @include font-size(xs);
@@ -20,16 +25,18 @@
   }
 
   &--size-large {
-    @include font-size(lg);
+    padding: 7px 14px;
+
+    @include font-size(md);
   }
 
   &--theme-primary {
     color: white;
 
-    @include bg-color(primary300);
+    @include bg-color(primary100);
 
     &:hover {
-      @include bg-color(primary400);
+      filter: brightness(0.95);
     }
   }
 
