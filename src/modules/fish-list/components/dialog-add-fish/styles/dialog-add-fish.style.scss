@@ -1,0 +1,52 @@
+@import "common/styles/import.scss";
+
+.ui-dialog-add-fish {
+  max-width: 500px;
+  padding: 16px 20px;
+  overflow: unset;
+  width: 90%;
+
+  @include rounded(8px);
+
+  &__header {
+    padding-bottom: 8px;
+
+    @include border-bottom(1px, solid, get-color(greyLight));
+  }
+
+  &__body {
+    padding: 16px 0;
+
+    .ui-text-input__wrapper {
+      margin-bottom: 8px;
+    }
+
+    .ui-button {
+      margin-top: 16px;
+      width: 100%;
+    }
+  }
+
+  .suggestion {
+    position: absolute;
+    padding: 8px;
+    top: 36px;
+    z-index: 99;
+
+    @include bg-color(white);
+    @include shadow(default-2);
+    @include rounded(8px);
+
+    > div {
+      cursor: pointer;
+      min-width: 200px;
+      padding: 6px 12px;
+
+      @include rounded(4px);
+
+      &:hover {
+        @include bg-color(greyLight);
+      }
+    }
+  }
+}
