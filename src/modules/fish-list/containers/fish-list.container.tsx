@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import debounce from "debounce"
 import PaginationComponent from "common/components/pagination/pagination.component"
 import TableComponent from "common/components/table/table.component"
@@ -12,16 +12,19 @@ import {
 import TextInput from "common/components/text-input/text-input.component"
 import CardComponent from "common/components/card/card.component"
 import IconComponent from "common/components/icon/icon.component"
+import ButtonComponent from "common/components/button/button.component"
+import DialogAddFishComponent from "modules/fish-list/components/dialog-add-fish/dialog-add-fish.component"
 
 const FishListContainer = () => {
   const [page, setPage] = useState(1)
   const [keyword, setKeyword] = useState("")
+  const [dialogAddOpen, setDialogAddOpen] = useState(false)
 
   const offset = useMemo(() => {
     return DEFAULT_OFFSET + (page - 1) * DEFAULT_LIMIT
   }, [page])
 
-  const { fishes, isLoading } = useFishList(
+  const { fishes, mutate, isLoading } = useFishList(
     {
       limit: DEFAULT_LIMIT,
       offset,
@@ -48,12 +51,15 @@ const FishListContainer = () => {
 
   return (
     <>
-      <CardComponent>
+      <CardComponent className="flex flex-align-center flex-justify-between gap-16">
         <TextInput
           onChange={handleChangeKeyword}
           leftAddon={<IconComponent color="grey">search</IconComponent>}
           placeholder="Cari nama komoditas"
         />
+        <ButtonComponent size="large" onClick={() => setDialogAddOpen(true)}>
+          Tambah
+        </ButtonComponent>
       </CardComponent>
       <TableComponent
         isLoading={isLoading}
@@ -72,6 +78,11 @@ const FishListContainer = () => {
           />
         </div>
       )}
+      <DialogAddFishComponent
+        open={dialogAddOpen}
+        onClose={(): void => setDialogAddOpen(false)}
+        onFinishAddFish={mutate}
+      />
     </>
   )
 }
