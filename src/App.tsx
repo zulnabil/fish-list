@@ -11,7 +11,6 @@ function App() {
     <Router>
       <SWRConfig
         value={{
-          refreshInterval: 3000,
           fetcher,
         }}
       >
