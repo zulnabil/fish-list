@@ -1,24 +1,25 @@
 import { dateFormatter } from "./../../../common/helper/string.helper"
 import useSWR from "swr"
-import { BASE_STEIN_URL } from "common/config/env"
 import {
   FishItemObjectType,
-  ObjectStringType,
   FishListParamsType,
 } from "modules/fish-list/types/fish-list.type"
 import { thousandSeparator } from "common/helper/string.helper"
 
 export default function useFishList(
   params?: FishListParamsType,
-  search?: ObjectStringType
+  keyword?: string
 ) {
-  const searchParams = new URLSearchParams(params as Record<string, string>)
+  let searchParams = new URLSearchParams(params as Record<string, string>)
 
-  if (search) searchParams.append("search", JSON.stringify(search))
+  if (keyword)
+    searchParams = new URLSearchParams({
+      search: JSON.stringify({ komoditas: keyword }),
+    } as Record<string, string>)
 
-  const url = `${BASE_STEIN_URL}/list${params ? `?${searchParams}` : ""}`
+  const path = `/list${params ? `?${searchParams}` : ""}`
 
-  const { data, error } = useSWR(decodeURIComponent(url))
+  const { data, error } = useSWR(path)
 
   const formattedData = data?.map((fish: FishItemObjectType) => ({
     ...fish,
