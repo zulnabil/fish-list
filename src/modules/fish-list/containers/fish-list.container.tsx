@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react"
+import { FC, useMemo, useState } from "react"
 import debounce from "debounce"
 import PaginationComponent from "common/components/pagination/pagination.component"
 import TableComponent from "common/components/table/table.component"
@@ -36,6 +36,16 @@ const FishListContainer = () => {
     500
   )
 
+  const EmptyState = () => {
+    return !fishes?.length && !isLoading ? (
+      <CardComponent>
+        <p className="text-center">There is no data</p>
+      </CardComponent>
+    ) : (
+      <></>
+    )
+  }
+
   return (
     <>
       <CardComponent>
@@ -51,6 +61,7 @@ const FishListContainer = () => {
         rows={fishes}
         rowCount={DEFAULT_LIMIT}
       ></TableComponent>
+      <EmptyState />
       {Boolean(!keyword) && (
         <div className="flex">
           <PaginationComponent
