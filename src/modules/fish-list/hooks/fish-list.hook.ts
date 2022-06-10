@@ -19,7 +19,7 @@ export default function useFishList(
 
   const path = `/list${params ? `?${searchParams}` : ""}`
 
-  const { data, error } = useSWR(path)
+  const { data, error, mutate } = useSWR(path)
 
   const formattedData = data?.map((fish: FishItemObjectType) => ({
     ...fish,
@@ -29,6 +29,7 @@ export default function useFishList(
 
   return {
     fishes: formattedData,
+    mutate,
     isLoading: !error && !data,
     isError: error,
   }
