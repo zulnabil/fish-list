@@ -9,19 +9,31 @@ import { objToString } from "common/helper/string.helper"
  * @param {DialogProps} props
  * @returns {FC}
  */
-const DialogComponent: FC<DialogProps> = ({ children, open, onClose }) => {
+const DialogComponent: FC<DialogProps> = ({
+  children,
+  className: classNameInitial,
+  open,
+  onClose,
+  type = "drawer",
+  direction = "left",
+}) => {
   const ref: any = useRef(null)
 
   const className = {
     "ui-dialog": true,
+    "ui-dialog--open": open,
     "ui-dialog--hide": !open,
+    "ui-dialog--type-drawer": type === "drawer",
+    "ui-dialog--type-modal": type === "modal",
+    [`ui-dialog--direction-${direction}`]: type === "drawer",
+    [classNameInitial as string]: Boolean(classNameInitial),
   }
 
   useEffect(() => {
     if (open) {
       ref.current?.showModal()
     } else {
-      ref.current?.close()
+      setTimeout(() => ref.current?.close(), 250)
     }
   }, [open])
 

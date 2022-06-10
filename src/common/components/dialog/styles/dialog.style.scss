@@ -1,38 +1,92 @@
 @import "common/styles/import.scss";
 
+$root: ".ui-dialog";
+
 .ui-dialog {
-  top: 0;
   max-height: unset;
   max-width: unset;
   padding: 16px;
+  position: absolute;
 
   @include no-border();
-  @include border(right, 1px, solid, blackSoft);
 
   ::backdrop {
-    background: rgba(0, 0, 0, 0.3);
+    @include bg-color(rgba(0, 0, 0, 0.3));
   }
 
-  &[open] {
-    animation: show 0.25s ease normal;
+  &--type-modal {
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.ui-dialog--open.ui-dialog--direction-left {
+  animation: show-left 0.25s ease normal;
+}
+
+.ui-dialog--hide.ui-dialog--direction-left {
+  animation: hide-left 0.25s ease normal;
+}
+
+.ui-dialog--open.ui-dialog--direction-bottom {
+  animation: show-bottom 0.25s ease normal;
+}
+
+.ui-dialog--hide.ui-dialog--direction-bottom {
+  animation: hide-bottom 0.25s ease normal;
+}
+
+.ui-dialog--open.ui-dialog--type-modal {
+  animation: show-fade 0.25s ease normal;
+}
+
+.ui-dialog--hide.ui-dialog--type-modal {
+  animation: hide-fade 0.25s ease normal;
+}
+
+@keyframes show-fade {
+  from {
+    opacity: 0;
   }
 
-  &--hide {
-    animation: hide 0.25s ease normal;
+  to {
+    opacity: 1;
   }
+}
 
-  @keyframes show {
-    from {
-      transform: translateX(-110%);
-    }
-    to {
-      transform: translateX(0%);
-    }
+@keyframes hide-fade {
+  to {
+    opacity: 0;
   }
+}
 
-  @keyframes hide {
-    to {
-      transform: translateX(-110%);
-    }
+@keyframes show-bottom {
+  from {
+    transform: translateY(90%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes hide-bottom {
+  to {
+    transform: translateY(90%);
+  }
+}
+
+@keyframes show-left {
+  from {
+    transform: translateX(-110%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes hide-left {
+  to {
+    transform: translateX(-110%);
   }
 }
