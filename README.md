@@ -1,46 +1,74 @@
-# Getting Started with Create React App
+# Fish List in Indonesia
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Dashboard to list and add the Fish data in Indonesia using data from Google Sheet https://stein.efishery.com/v1/storages/5e1edf521073e315924ceab4/list
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### `yarn start`
+### Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Copy the env example file to env local
 
-The page will reload if you make edits.\
+```
+cp env.example env.local
+```
+
+### Installing
+
+A step of examples that tell you how to get a development env that ready to start
+
+Install all dependencies by running :
+
+```
+yarn
+```
+
+### Start development server
+
+A step of examples that tell you how to get a development env running
+
+Start the development server by running :
+
+```
+yarn start
+```
+Runs the app in the development mode.
+Open http://localhost:3000 to view it in the browser.
+
+The page will reload if you make edits.
 You will also see any lint errors in the console.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Explanation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Please read [EXPLANATION.md](https://github.com/zulnabil/fish-list/blob/main/EXPLANATION.md) for details of this project
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Built With
 
-### `yarn eject`
+* [Typescript](https://www.typescriptlang.org/) - The Javascript static types
+* [React](https://reactjs.org/) - The Javascript library
+* [SASS](https://sass-lang.com/) - CSS pre-processor framework
+* [SWR](https://swr.vercel.app/) - React Hooks for Data Fetching
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Versioning
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Authors
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* **Zulnabil Alhadad** - *Initial work* - [zulnabil](https://github.com/zulnabil)
 
-## Learn More
+See also the list of [contributors](https://github.com/zulnabil/fish-list/contributors) who participated in this project.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Hat tip to anyone whose code was used
+* Inspiration
+* etc
