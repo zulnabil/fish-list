@@ -59,7 +59,7 @@ const DialogAddFishComponent: FC<DialogAddFishProps> = ({
         ))}
       </div>
     ) : null
-  }, [optionAreas])
+  }, [optionAreas, setValue])
 
   const SuggestionsSize = useMemo(() => {
     return optionSizes?.length ? (
@@ -76,7 +76,7 @@ const DialogAddFishComponent: FC<DialogAddFishProps> = ({
         ))}
       </div>
     ) : null
-  }, [optionSizes])
+  }, [optionSizes, setValue])
 
   const clearAllValues = () => {
     reset()
