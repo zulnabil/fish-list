@@ -1,4 +1,4 @@
-import { FC, useMemo, useRef, useState } from "react"
+import { FC, SyntheticEvent, useMemo, useRef, useState } from "react"
 import { v4 } from "uuid"
 import { debounce } from "debounce"
 
@@ -92,7 +92,9 @@ const DialogAddFishComponent: FC<DialogAddFishProps> = ({
     clearAllValues()
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event: SyntheticEvent) => {
+    event.preventDefault()
+
     const payload = {
       uuid: v4(),
       komoditas: inputRefs.current[0].value,
@@ -127,14 +129,16 @@ const DialogAddFishComponent: FC<DialogAddFishProps> = ({
       <div className="ui-dialog-add-fish__header">
         <p>Tambah Komoditas</p>
       </div>
-      <div className="ui-dialog-add-fish__body">
+      <form className="ui-dialog-add-fish__body" onSubmit={handleSubmit}>
         <TextInput
           placeholder="Nama komoditas"
           ref={(el) => (inputRefs.current[0] = el as HTMLInputElement)}
+          required
         />
         <TextInput
           placeholder="Harga"
           ref={(el) => (inputRefs.current[1] = el as HTMLInputElement)}
+          required
         />
         <TextInput
           placeholder="Cari Kota"
@@ -145,6 +149,7 @@ const DialogAddFishComponent: FC<DialogAddFishProps> = ({
           suggestionElement={SuggestionsArea}
           valueInitial={tempValueArea}
           ref={(el) => (inputRefs.current[2] = el as HTMLInputElement)}
+          required
         />
         <TextInput
           placeholder="Ukuran"
@@ -156,10 +161,10 @@ const DialogAddFishComponent: FC<DialogAddFishProps> = ({
           ref={(el) => (inputRefs.current[3] = el as HTMLInputElement)}
           readOnly
         />
-        <ButtonComponent size="large" onClick={handleSubmit}>
+        <ButtonComponent size="large" type="submit">
           Submit{isLoading && "..."}
         </ButtonComponent>
-      </div>
+      </form>
     </DialogComponent>
   )
 }

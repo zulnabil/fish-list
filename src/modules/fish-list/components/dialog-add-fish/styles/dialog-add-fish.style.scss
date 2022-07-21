@@ -9,25 +9,28 @@
   @include rounded(0.5rem);
 
   &__header {
-    padding-bottom: 0.5rem;
+    font-size: 18px;
+    padding-bottom: 1rem;
 
     @include border-bottom(1px, solid, get-color(greyLight));
   }
 
   &__body {
-    padding: 1rem 0;
+    padding: 1.5rem 0 1rem;
 
     .ui-text-input__wrapper {
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
     }
 
     .ui-button {
-      margin-top: 1rem;
+      margin-top: 2rem;
       width: 100%;
     }
   }
 
   .suggestion {
+    max-height: 300px;
+    overflow: auto;
     position: absolute;
     padding: 0.5rem;
     top: 36px;
