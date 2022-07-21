@@ -1,7 +1,7 @@
 .ui-layout {
   &__body {
     gap: 32px;
-    padding: 16px 0;
+    padding: 1rem 0;
 
     @media (max-width: 576px) {
       flex-direction: column;

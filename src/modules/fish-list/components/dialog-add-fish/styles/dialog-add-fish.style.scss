@@ -6,36 +6,36 @@
   overflow: unset;
   width: 90%;
 
-  @include rounded(8px);
+  @include rounded(0.5rem);
 
   &__header {
-    padding-bottom: 8px;
+    padding-bottom: 0.5rem;
 
     @include border-bottom(1px, solid, get-color(greyLight));
   }
 
   &__body {
-    padding: 16px 0;
+    padding: 1rem 0;
 
     .ui-text-input__wrapper {
-      margin-bottom: 8px;
+      margin-bottom: 1rem;
     }
 
     .ui-button {
-      margin-top: 16px;
+      margin-top: 1rem;
       width: 100%;
     }
   }
 
   .suggestion {
     position: absolute;
-    padding: 8px;
+    padding: 0.5rem;
     top: 36px;
     z-index: 99;
 
     @include bg-color(white);
     @include shadow(default-2);
-    @include rounded(8px);
+    @include rounded(0.5rem);
 
     > div {
       cursor: pointer;

@@ -6,7 +6,7 @@
 
   > button {
     @media (max-width: 576px) {
-      margin-top: 16px;
+      margin-top: 1rem;
     }
   }
 
@@ -27,14 +27,14 @@
     color: get-color(blackSoft);
     text-decoration: none;
     display: flex;
-    gap: 8px;
+    gap: 0.5rem;
     line-height: 24px;
     padding: 8px 12px;
     width: 100%;
     outline: none;
 
     @include no-border();
-    @include rounded(8px);
+    @include rounded(0.5rem);
 
     &:hover {
       @include bg-color(greyLight);

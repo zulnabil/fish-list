@@ -5,7 +5,7 @@ $root: ".ui-dialog";
 .ui-dialog {
   max-height: unset;
   max-width: unset;
-  padding: 16px;
+  padding: 1rem;
   position: absolute;
 
   @include no-border();
