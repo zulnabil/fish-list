@@ -24,4 +24,9 @@
     top: 50%;
     transform: translateY(-50%);
   }
+
+  &__error {
+    color: red;
+    margin-top: 0.5rem;
+  }
 }

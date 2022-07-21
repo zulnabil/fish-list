@@ -4,7 +4,18 @@ import { TextInputProps } from "common/components/text-input/types/text-input.ty
 import "./styles/text-input.style.scss"
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ leftAddon, suggestionElement, valueInitial, ...props }, ref) => {
+  (
+    {
+      errorMessage,
+      onBlur,
+      onFocus,
+      leftAddon,
+      suggestionElement,
+      valueInitial,
+      ...props
+    },
+    ref
+  ) => {
     const [isFocus, setIsFocus] = useState(false)
 
     const value = valueInitial || props.value
@@ -14,14 +25,24 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           <span className="ui-text-input__left-addon">{leftAddon}</span>
         )}
         <input
+          autoComplete={suggestionElement ? "off" : props.autoComplete}
           className="ui-text-input"
           data-addon={Boolean(leftAddon)}
-          onFocus={() => setIsFocus(true)}
-          onBlur={() => setTimeout(() => setIsFocus(false), 100)}
+          onFocus={(event) => {
+            onFocus && onFocus(event)
+            setIsFocus(true)
+          }}
+          onBlur={(event) => {
+            onBlur && onBlur(event)
+            setTimeout(() => setIsFocus(false), 100)
+          }}
           value={value}
           {...props}
           ref={ref}
         />
+        {Boolean(errorMessage) && (
+          <p className="ui-text-input__error">{errorMessage}</p>
+        )}
         {Boolean(suggestionElement) && isFocus && suggestionElement}
       </div>
     )
