@@ -1,6 +1,8 @@
-import { FC, SyntheticEvent, useMemo, useRef, useState } from "react"
+import { FC, useMemo, useState } from "react"
 import { v4 } from "uuid"
 import { debounce } from "debounce"
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
 
 import ButtonComponent from "common/components/button/button.component"
 import DialogComponent from "common/components/dialog/dialog.component"
@@ -11,22 +13,15 @@ import { addFish } from "modules/fish-list/services/fish-list.service"
 
 import "./styles/dialog-add-fish.style.scss"
 import { DialogAddFishProps } from "modules/fish-list/components/dialog-add-fish/types/dialog-add-fish.type"
+import { addFishSchema } from "modules/fish-list/constants/fish-list.constant"
 
 const DialogAddFishComponent: FC<DialogAddFishProps> = ({
   open,
   onClose,
   onFinishAddFish,
 }) => {
-  const inputRefs = useRef<HTMLInputElement[]>([])
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle")
   const [keywordCity, setKeywordCity] = useState("")
-  const [selectedArea, setSelectedArea] = useState({
-    city: "",
-    province: "",
-  })
-  const [selectedSize, setSelectedSize] = useState("")
-  const [tempValueArea, setTempValueArea] = useState("")
-  const [tempValueSize, setTempValueSize] = useState("")
 
   const { optionAreas } = useFishArea(keywordCity)
 
@@ -41,6 +36,16 @@ const DialogAddFishComponent: FC<DialogAddFishProps> = ({
     500
   )
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setValue,
+  } = useForm({
+    resolver: yupResolver(addFishSchema),
+  })
+
   const SuggestionsArea = useMemo(() => {
     return optionAreas?.length ? (
       <div className="suggestion">
@@ -48,8 +53,7 @@ const DialogAddFishComponent: FC<DialogAddFishProps> = ({
           <div
             key={area.city}
             onClick={() => {
-              setSelectedArea(area)
-              setTempValueArea(`${area.city}, ${area.province}`)
+              setValue("city", `${area.city}, ${area.province}`)
             }}
           >{`${area.city}, ${area.province}`}</div>
         ))}
@@ -64,8 +68,7 @@ const DialogAddFishComponent: FC<DialogAddFishProps> = ({
           <div
             key={size}
             onClick={() => {
-              setSelectedSize(size)
-              setTempValueSize(size)
+              setValue("size", size)
             }}
           >
             {size}
@@ -76,32 +79,31 @@ const DialogAddFishComponent: FC<DialogAddFishProps> = ({
   }, [optionSizes])
 
   const clearAllValues = () => {
-    if (!inputRefs.current) return
-
-    inputRefs.current.forEach((inputRef: HTMLInputElement) => {
-      inputRef.value = ""
-    })
-    setTempValueArea("")
-    setTempValueSize("")
-    setSelectedArea({ city: "", province: "" })
-    setSelectedSize("")
+    reset()
+    setKeywordCity("")
   }
 
   const handleCloseDialog = () => {
     onClose && onClose()
+
     clearAllValues()
   }
 
-  const handleSubmit = async (event: SyntheticEvent) => {
-    event.preventDefault()
+  const onSubmitHandler = async ({
+    komoditas,
+    price,
+    size,
+    ...values
+  }: any) => {
+    const [area_kota, area_provinsi] = values.city.split(", ")
 
     const payload = {
       uuid: v4(),
-      komoditas: inputRefs.current[0].value,
-      price: inputRefs.current[1].value,
-      area_provinsi: selectedArea.province,
-      area_kota: selectedArea.city,
-      size: selectedSize,
+      komoditas,
+      price,
+      area_provinsi: area_provinsi || "",
+      area_kota,
+      size,
       tgl_parsed: new Date().toISOString(),
       timestamp: `${Date.now()}`,
     }
@@ -129,36 +131,37 @@ const DialogAddFishComponent: FC<DialogAddFishProps> = ({
       <div className="ui-dialog-add-fish__header">
         <p>Tambah Komoditas</p>
       </div>
-      <form className="ui-dialog-add-fish__body" onSubmit={handleSubmit}>
+
+      <form
+        className="ui-dialog-add-fish__body"
+        onSubmit={handleSubmit(onSubmitHandler)}
+        noValidate
+      >
         <TextInput
+          {...register("komoditas")}
+          errorMessage={errors.komoditas?.message as unknown as string}
           placeholder="Nama komoditas"
-          ref={(el) => (inputRefs.current[0] = el as HTMLInputElement)}
           required
         />
         <TextInput
+          {...register("price")}
+          errorMessage={errors.price?.message as unknown as string}
           placeholder="Harga"
-          ref={(el) => (inputRefs.current[1] = el as HTMLInputElement)}
           required
         />
         <TextInput
+          {...register("city")}
+          errorMessage={errors.city?.message as unknown as string}
           placeholder="Cari Kota"
-          onChange={(event) => {
-            handleChangeKeyword(event)
-            setTempValueArea(event.target.value)
-          }}
+          onChange={handleChangeKeyword}
           suggestionElement={SuggestionsArea}
-          valueInitial={tempValueArea}
-          ref={(el) => (inputRefs.current[2] = el as HTMLInputElement)}
           required
         />
         <TextInput
+          {...register("size")}
+          errorMessage={errors.size?.message as unknown as string}
           placeholder="Ukuran"
-          onChange={(event) => {
-            setTempValueSize(event.target.value)
-          }}
           suggestionElement={SuggestionsSize}
-          valueInitial={tempValueSize}
-          ref={(el) => (inputRefs.current[3] = el as HTMLInputElement)}
           readOnly
         />
         <ButtonComponent size="large" type="submit">
