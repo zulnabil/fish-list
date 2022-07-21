@@ -1,6 +1,6 @@
 export const DEFAULT_LIMIT = 15
 export const DEFAULT_OFFSET = 0
-export const TOTAL_ITEMS = 310 // total items in the sheet
+export const TOTAL_ITEMS = 230 // total items in the sheet
 export const TOTAL_PAGE = Math.floor(
   (TOTAL_ITEMS - Math.max(DEFAULT_OFFSET, 0)) / DEFAULT_LIMIT
 )
